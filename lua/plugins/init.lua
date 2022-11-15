@@ -42,7 +42,9 @@ packer.init {
 -- <Insert your plugins here>
 return require'packer'.startup(function()
   use 'wbthomason/packer.nvim' --Manages Packer
-  use 'sainnhe/sonokai' --Color Scheme
+  use "nvim-lua/popup.nvim"
+  use "nvim-lua/plenary.nvim"
+  use 'sainnhe/sonokai' --Coilor Scheme
 
   -- TreeSitter
   use{
@@ -63,9 +65,16 @@ return require'packer'.startup(function()
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
   -- LSP 
-  use "neovim/nvim-lspconfig" -- configuration for nvim lsp
+  use "neovim/nvim-lspconfig" -- configuration for nvim lsp
   use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-nvim-lua"
+  use "williamboman/mason.nvim" -- language server installer
+  use "williamboman/mason-lspconfig.nvim"
   
+  -- Telescope
+  use "nvim-telescope/telescope.nvim"
+  use 'nvim-telescope/telescope-media-files.nvim'
+
   -- File Explore via nvim-tree
   use {
     'nvim-tree/nvim-tree.lua',
@@ -80,6 +89,5 @@ return require'packer'.startup(function()
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
-    
 
 end)
