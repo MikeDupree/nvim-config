@@ -1,5 +1,7 @@
 local set = vim.opt
-                                                                
+
+vim.g.netrw_banner=0
+
 set.expandtab=true
 set.shiftwidth=2
 set.softtabstop=2                                                                                                             

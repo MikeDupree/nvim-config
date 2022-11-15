@@ -5,6 +5,9 @@ require('settings')
 require('colors')
 require('treesitter')
 require('completion')
+require('lsp-config')
+require('file-explorer')
+
 
 vim.cmd "colorscheme sonokai"
 
@@ -30,7 +33,7 @@ keymap("n", "<C-Left>", ":vertical resize +2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts)
 
 -- Explorer toggle
-keymap("n", "<leader>e", ":Lex 30<cr>", opts)
+keymap("n", "<leader>e", ":Lex 10<cr>", opts)
 
 -- Switch between buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)

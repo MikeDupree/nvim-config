@@ -62,7 +62,18 @@ return require'packer'.startup(function()
   use "L3MON4D3/LuaSnip" --snippet engine
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
-
+  -- LSP 
+  use "neovim/nvim-lspconfig" -- configuration for nvim lsp
+  use "hrsh7th/cmp-nvim-lsp"
+  
+  -- File Explore via nvim-tree
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+    },
+    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
