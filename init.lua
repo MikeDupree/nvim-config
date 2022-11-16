@@ -9,6 +9,10 @@ require('lsp-config')
 require('file-explorer')
 require('telescope')
 
+-- Syntax highlighting JS/TS
+require('lspconfig/quick_lint_js').setup {}
+
+
 vim.cmd "colorscheme sonokai"
 
 local keymap = vim.api.nvim_set_keymap

@@ -15,7 +15,7 @@ M.setup = function()
 
   local config = {
     -- disable virtual text
-    virtual_text = false,
+    virtual_text = { prefix = "-" },
     -- show signs
     signs = {
       active = signs,
@@ -41,10 +41,34 @@ M.setup = function()
 
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "rounded",
+    focusable = true,
+    relative = "cursor"
   })
+
+   -- suppress error messages from lang servers
+  vim.notify = function(msg, log_level)
+    if msg:match "exit code" then
+      return
+    end
+    if log_level == vim.log.levels.ERROR then
+      vim.api.nvim_err_writeln(msg)
+    else
+      vim.api.nvim_echo({ { msg } }, true, {})
+    end
+  end
+
+  -- Borders for LspInfo winodw
+  local win = require "lspconfig.ui.windows"
+  local _default_opts = win.default_opts
+
+  win.default_opts = function(options)
+    local opts = _default_opts(options)
+    opts.border = "single"
+    return opts
+  end
 end
 
-local function lsp_highlight_document(client)
+local function lsp_highlight_document(client, bufnr)
   -- Set autocommands conditional on server_capabilities
   if client.server_capabilities.documentHighlight then
     vim.api.nvim_exec(
@@ -57,6 +81,27 @@ local function lsp_highlight_document(client)
     ]],
       false
     )
+  end
+
+  -- Set autocommands conditional on server_capabilities
+  if client.server_capabilities.documentHighlightProvider then
+    vim.api.nvim_create_augroup("lsp_document_highlight", {
+      clear = false
+    })
+    vim.api.nvim_clear_autocmds({
+      buffer = bufnr,
+      group = "lsp_document_highlight",
+    })
+    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+      group = "lsp_document_highlight",
+      buffer = bufnr,
+      callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd("CursorMoved", {
+      group = "lsp_document_highlight",
+      buffer = bufnr,
+      callback = vim.lsp.buf.clear_references,
+    })
   end
 end
 
@@ -99,6 +144,11 @@ if not status_ok then
   return
 end
 
-M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+local cmp_capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+
+cmp_capabilities.textDocument.semanticHighlighting = true
+cmp_capabilities.offsetEncoding = "utf-8"
+
+M.capabilities = cmp_capabilities
 
 return M
