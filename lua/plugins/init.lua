@@ -44,7 +44,7 @@ return require'packer'.startup(function()
   use 'wbthomason/packer.nvim' --Manages Packer
   use "nvim-lua/popup.nvim"
   use "nvim-lua/plenary.nvim"
-  use 'sainnhe/sonokai' --Coilor Scheme
+  use 'sainnhe/sonokai' --Color Scheme
 
   -- TreeSitter
   use{
