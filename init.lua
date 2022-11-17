@@ -12,7 +12,7 @@ require('telescope')
 -- Syntax highlighting JS/TS
 require('lspconfig/quick_lint_js').setup {}
 
-
+vim.g.sonokai_transparent_background = 2
 vim.cmd "colorscheme sonokai"
 
 local keymap = vim.api.nvim_set_keymap
