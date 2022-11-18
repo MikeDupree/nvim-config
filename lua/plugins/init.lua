@@ -70,7 +70,9 @@ return require'packer'.startup(function()
   use "hrsh7th/cmp-nvim-lua"
   use "williamboman/mason.nvim" -- language server installer
   use "williamboman/mason-lspconfig.nvim"
-  
+  use "MunifTanjim/prettier.nvim"
+  use "glepnir/lspsaga.nvim"
+
   -- Telescope
   use "nvim-telescope/telescope.nvim"
   use 'nvim-telescope/telescope-media-files.nvim'
@@ -83,7 +85,11 @@ return require'packer'.startup(function()
     },
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
-
+  
+  use "dinhhuy258/git.nvim"
+  
+  -- Display line indents
+  use "lukas-reineke/indent-blankline.nvim"
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then

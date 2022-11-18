@@ -6,9 +6,11 @@ require('colors')
 require('treesitter')
 require('completion')
 require('lsp-config')
+--require('lsp-saga-config')
 require('file-explorer')
 require('telescope')
-
+require('indent-config')
+require('git-config')
 -- Syntax highlighting JS/TS
 require('lspconfig/quick_lint_js').setup {}
 
