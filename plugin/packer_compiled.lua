@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/home/mdupree/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["auto-pairs.nvim"] = {
+    loaded = true,
+    path = "/home/mdupree/.local/share/nvim/site/pack/packer/start/auto-pairs.nvim",
+    url = "https://github.com/jiangmiao/auto-pairs.nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/mdupree/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -129,6 +134,11 @@ _G.packer_plugins = {
     path = "/home/mdupree/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
     url = "https://github.com/glepnir/lspsaga.nvim"
   },
+  ["lualine.nvim"] = {
+    loaded = true,
+    path = "/home/mdupree/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/home/mdupree/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
@@ -165,9 +175,10 @@ _G.packer_plugins = {
     url = "https://github.com/p00f/nvim-ts-rainbow"
   },
   ["nvim-web-devicons"] = {
-    loaded = true,
-    path = "/home/mdupree/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
-    url = "https://github.com/nvim-tree/nvim-web-devicons"
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/mdupree/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
+    url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = true,

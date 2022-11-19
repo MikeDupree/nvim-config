@@ -11,6 +11,7 @@ require('file-explorer')
 require('telescope')
 require('indent-config')
 require('git-config')
+require('lualine-config')
 -- Syntax highlighting JS/TS
 require('lspconfig/quick_lint_js').setup {}
 
