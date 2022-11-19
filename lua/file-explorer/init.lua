@@ -5,8 +5,6 @@ vim.g.loaded_netrwPlugin = 1
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
--- empty setup using defaults
-require("nvim-tree").setup()
 
 -- OR setup with some options
 require("nvim-tree").setup({
@@ -48,8 +46,8 @@ require("nvim-tree").setup({
         symlink = "",
         bookmark = "",
         folder = {
-          arrow_closed = "",
-          arrow_open = "",
+          arrow_closed = "├",
+          arrow_open = "├",
           default = "",
           open = "",
           empty = "",
@@ -58,7 +56,7 @@ require("nvim-tree").setup({
           symlink_open = "",
         },
         git = {
-          unstaged = "﯑",
+          unstaged = "*",
           staged = "",
           unmerged = "",
           renamed = "➜",
@@ -67,6 +65,17 @@ require("nvim-tree").setup({
           ignored = "◌",
         },
       },
+    },
+  },
+  diagnostics = {
+    enable = false,
+    show_on_dirs = false,
+    debounce_delay = 50,
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
     },
   },
   filters = {
