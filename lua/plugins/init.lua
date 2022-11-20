@@ -76,12 +76,30 @@ return require'packer'.startup(function()
   use "williamboman/mason.nvim" -- language server installer
   use "williamboman/mason-lspconfig.nvim"
   use "MunifTanjim/prettier.nvim"
-  use "glepnir/lspsaga.nvim"
+  use({
+    "glepnir/lspsaga.nvim",
+    branch = "main",
+    config = function()
+        local saga = require("lspsaga")
 
+        saga.init_lsp_saga({
+          -- your configuration
+          symbol_in_winbar = {
+            in_custom = true
+          }
+        })
+    end,
+})
+  use "jose-elias-alvarez/nvim-lsp-ts-utils"
+  -- Ale Linting
+  use "dense-analaysis/ale"
+  -- Rust
+  use "simrat39/rust-tools.nvim"
+  -- Debugging
+  use 'mfussenegger/nvim-dap'
   -- Telescope
   use "nvim-telescope/telescope.nvim"
   use 'nvim-telescope/telescope-media-files.nvim'
-
   -- File Explore via nvim-tree
   use {
     'nvim-tree/nvim-tree.lua',
@@ -90,15 +108,14 @@ return require'packer'.startup(function()
     },
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
-  
   use "dinhhuy258/git.nvim"
-  
   -- Display line indents
   use "lukas-reineke/indent-blankline.nvim"
- 
   -- Auto add matching bracket
-  use "jiangmiao/auto-pairs.nvim"
-
+  use {
+      "windwp/nvim-autopairs",
+      config = function() require("nvim-autopairs").setup {} end
+  }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
