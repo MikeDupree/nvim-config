@@ -109,6 +109,7 @@ cmp.setup {
     end,
   },
   sources = {
+    { name = 'nvim_lsp' },
     { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
@@ -125,3 +126,8 @@ cmp.setup {
     native_menu = false,
   },
 }
+
+vim.cmd [[
+  set completeopt=menuone,noinsert,noselect
+  highlight! default link CmpItemKind CmpItemMenuDefault
+]]

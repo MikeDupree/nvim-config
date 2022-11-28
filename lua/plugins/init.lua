@@ -118,6 +118,13 @@ return require 'packer'.startup(function(use)
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
   }
+  use { "windwp/nvim-ts-autotag",
+    config = function()
+      local status, autotag = pcall(require, "nvim-ts-autotag")
+      if (not status) then return end
+      autotag.setup({})
+    end
+  }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then

@@ -79,11 +79,6 @@ _G.packer_plugins = {
     path = "/home/mdupree/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  ale = {
-    loaded = true,
-    path = "/home/mdupree/.local/share/nvim/site/pack/packer/start/ale",
-    url = "https://github.com/dense-analaysis/ale"
-  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/mdupree/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -236,6 +231,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/mdupree/.local/share/nvim/site/pack/packer/start/sonokai",
     url = "https://github.com/sainnhe/sonokai"
+  },
+  ["telescope-fzf-native.nvim"] = {
+    loaded = true,
+    path = "/home/mdupree/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
   },
   ["telescope-media-files.nvim"] = {
     loaded = true,

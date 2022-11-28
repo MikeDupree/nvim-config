@@ -15,4 +15,10 @@ configs.setup {
     max_file_lines = nil;
   },
   indent = { enable = true, disable = { "yaml" } },
+  auto_tag = {
+    enable = true
+  }
 }
+
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
