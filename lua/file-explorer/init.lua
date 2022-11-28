@@ -27,7 +27,7 @@ require("nvim-tree").setup({
         edge = "│",
         item = "│",
         bottom = "─",
-        none = "x",
+        none = " ",
       },
     },
     icons = {
@@ -47,7 +47,7 @@ require("nvim-tree").setup({
         bookmark = "",
         folder = {
           arrow_closed = "├",
-          arrow_open = "├",
+          arrow_open = "├",
           default = "",
           open = "",
           empty = "",

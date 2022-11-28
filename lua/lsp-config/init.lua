@@ -25,7 +25,7 @@ lspconfig.tsserver.setup({
         ts_utils.setup({
             debug = false,
             disable_commands = false,
-            enable_import_on_completion = false,
+            enable_import_on_completion = true,
 
             -- import all
             import_all_timeout = 5000, -- ms

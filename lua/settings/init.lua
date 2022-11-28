@@ -1,10 +1,10 @@
 local set = vim.opt
 
-vim.g.netrw_banner=0
+vim.g.netrw_banner = 0
 
-set.expandtab=true
-set.shiftwidth=2
-set.softtabstop=2                                                                                                             
+set.expandtab = true
+set.shiftwidth = 2
+set.softtabstop = 2
 
 set.mouse = "a"
 

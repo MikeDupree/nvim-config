@@ -40,11 +40,14 @@ packer.init {
 
 -- Plugins
 -- <Insert your plugins here>
-return require'packer'.startup(function()
+return require 'packer'.startup(function(use)
   use 'wbthomason/packer.nvim' --Manages Packer
   use "nvim-lua/popup.nvim"
   use "nvim-lua/plenary.nvim"
   use 'sainnhe/sonokai' --Color Scheme
+  use 'RRethy/nvim-base16'
+
+  use 'EdenEast/nightfox.nvim'
 
   use {
     'nvim-lualine/lualine.nvim',
@@ -52,7 +55,7 @@ return require'packer'.startup(function()
   }
 
   -- TreeSitter
-  use{
+  use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
@@ -69,7 +72,7 @@ return require'packer'.startup(function()
   use "L3MON4D3/LuaSnip" --snippet engine
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
-  -- LSP 
+  -- LSP
   use "neovim/nvim-lspconfig" -- configuration for nvim lsp
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-nvim-lua"
@@ -80,26 +83,25 @@ return require'packer'.startup(function()
     "glepnir/lspsaga.nvim",
     branch = "main",
     config = function()
-        local saga = require("lspsaga")
+      local saga = require("lspsaga")
 
-        saga.init_lsp_saga({
-          -- your configuration
-          symbol_in_winbar = {
-            in_custom = true
-          }
-        })
+      saga.init_lsp_saga({
+        -- your configuration
+        symbol_in_winbar = {
+          in_custom = true
+        }
+      })
     end,
-})
+  })
   use "jose-elias-alvarez/nvim-lsp-ts-utils"
-  -- Ale Linting
-  use "dense-analaysis/ale"
   -- Rust
   use "simrat39/rust-tools.nvim"
   -- Debugging
   use 'mfussenegger/nvim-dap'
   -- Telescope
-  use "nvim-telescope/telescope.nvim"
+  use { "nvim-telescope/telescope.nvim", tag = '0.1.0' }
   use 'nvim-telescope/telescope-media-files.nvim'
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   -- File Explore via nvim-tree
   use {
     'nvim-tree/nvim-tree.lua',
@@ -113,8 +115,8 @@ return require'packer'.startup(function()
   use "lukas-reineke/indent-blankline.nvim"
   -- Auto add matching bracket
   use {
-      "windwp/nvim-autopairs",
-      config = function() require("nvim-autopairs").setup {} end
+    "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
   }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
