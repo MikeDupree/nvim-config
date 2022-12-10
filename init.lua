@@ -18,3 +18,6 @@ require('lualine-config')
 -- Syntax highlighting JS/TS
 require('lspconfig/quick_lint_js').setup {}
 
+-- Noone likes you swap
+vim.opt.swapfile = false
+vim.opt.backup = false

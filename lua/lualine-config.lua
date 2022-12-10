@@ -1,3 +1,9 @@
+
+-- GPS for lua line 
+require("nvim-gps").setup()
+local gps = require("nvim-gps")
+
+-- Configure lua line
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -21,8 +27,8 @@ require('lualine').setup {
     lualine_a = {
         { 'mode', fmt = function(str) return str:sub(1,1) end } },
     lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {{'filename', icon = {'פּ', color={fg='green'}}}},
-    lualine_x = { "" },
+    lualine_c = {{gps.get_location, cond = gps.is_available}},
+    lualine_x = {{'filename', icon = {'פּ', color={fg='green'}}}},
     lualine_y = {'progress'},
     lualine_z = {'os.date()'}
   },
@@ -39,3 +45,5 @@ require('lualine').setup {
   inactive_winbar = {},
   extensions = {}
 }
+
+

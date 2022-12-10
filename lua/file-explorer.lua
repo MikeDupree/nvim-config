@@ -9,6 +9,10 @@ vim.opt.termguicolors = true
 -- OR setup with some options
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
+  git = {
+    enable = true,
+    ignore = false
+  },
   view = {
     adaptive_size = true,
     mappings = {
@@ -68,7 +72,7 @@ require("nvim-tree").setup({
     },
   },
   diagnostics = {
-    enable = false,
+    enable = true,
     show_on_dirs = false,
     debounce_delay = 50,
     icons = {
@@ -79,6 +83,6 @@ require("nvim-tree").setup({
     },
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
   },
 })

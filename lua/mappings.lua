@@ -30,10 +30,19 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 -- keymap("n", "<leader>f", "<cmd>Telescope find_files<cr>", opts)
-keymap("n", "<leader>ff", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
+keymap("n", "<leader>ff",
+  "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
+  opts)
 keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
 -- Nvimtree
 keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
 
 -- Formatting
-keymap("n", "<leader>w", ":lua vim.lsp.buf.formatting_sync(nil, 10000)<CR>", opts)
+keymap("n", "<leader>w", ":lua vim.lsp.buf.format()<CR>", opts)
+
+-- Typescript
+keymap("n", "<leader>gs", ":TypescriptGoToSourceDefinition", opts)
+keymap("n", "<leader>ai", ":TypescriptAddMissingImports", opts)
+keymap("n", "<leader>rn", ":TypescriptRenameFile", opts)
+keymap("n", "<leader>fa", ":TypescriptFixAll", opts)
+keymap("n", "<leader>toi", ":TypescriptOrganizeImports", opts)
