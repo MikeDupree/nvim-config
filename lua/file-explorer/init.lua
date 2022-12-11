@@ -10,6 +10,7 @@ vim.opt.termguicolors = true
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
   view = {
+    width = 25,
     adaptive_size = true,
     mappings = {
       list = {
@@ -24,8 +25,8 @@ require("nvim-tree").setup({
       inline_arrows = true,
       icons = {
         corner = "└",
-        edge = "│",
-        item = "│",
+        edge = "",
+        item = "|",
         bottom = "─",
         none = " ",
       },
@@ -56,7 +57,7 @@ require("nvim-tree").setup({
           symlink_open = "",
         },
         git = {
-          unstaged = "*",
+          unstaged = "✗",
           staged = "",
           unmerged = "",
           renamed = "➜",
@@ -75,10 +76,13 @@ require("nvim-tree").setup({
       hint = "",
       info = "",
       warning = "",
-      error = "",
+      error = "ﱥ",
     },
   },
   filters = {
     dotfiles = true,
   },
+  actions = {
+    use_system_clipboard = true,
+  }
 })

@@ -2,8 +2,8 @@ require('lualine').setup {
   options = {
     icons_enabled = true,
     theme = 'auto',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
+    component_separators = { left = '祈', right = '祈' },
+    section_separators = { left = '', right = '' },
     disabled_filetypes = {
       statusline = {},
       winbar = {},
@@ -19,18 +19,30 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = {
-        { 'mode', fmt = function(str) return str:sub(1,1) end } },
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {{'filename', icon = {'פּ', color={fg='green'}}}},
-    lualine_x = { "" },
-    lualine_y = {'progress'},
-    lualine_z = {'os.date()'}
+      { 'mode', fmt = function(str) return str:sub(1, 1) end }
+    },
+    lualine_b = { 'branch', 'diff', 'diagnostics' },
+    lualine_c = {},
+    lualine_x = { {
+      'filename',
+      icon = { 'פּ', color = { fg = 'green' } },
+      color =
+      function(section)
+        if vim.b["file_exists"] == 0 then
+          return { fg = '#C20505' }
+        end
+      end,
+      path = 1
+    } },
+    lualine_y = { 'progress' },
+    lualine_z = { 'os.date()' }
+
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = { 'filename' },
+    lualine_x = { 'location' },
     lualine_y = {},
     lualine_z = {}
   },
