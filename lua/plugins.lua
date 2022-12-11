@@ -44,21 +44,27 @@ return require 'packer'.startup(function(use)
   use 'wbthomason/packer.nvim' --Manages Packer
   use "nvim-lua/popup.nvim"
   use "nvim-lua/plenary.nvim"
+
   use 'sainnhe/sonokai' --Color Scheme
   use 'RRethy/nvim-base16'
-
   use 'EdenEast/nightfox.nvim'
-
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }
 
   -- TreeSitter
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
+
+  -- LUA line
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
+  use {
+    "SmiteshP/nvim-gps",
+    requires = "nvim-treesitter/nvim-treesitter"
+  }
+
   use "p00f/nvim-ts-rainbow"
 
   -- cmp plugins
@@ -93,7 +99,14 @@ return require 'packer'.startup(function(use)
       })
     end,
   })
+
+  -- LSP addons
+
+
+
   use "jose-elias-alvarez/nvim-lsp-ts-utils"
+  use 'jose-elias-alvarez/typescript.nvim'
+
   -- Rust
   use "simrat39/rust-tools.nvim"
   -- Debugging
