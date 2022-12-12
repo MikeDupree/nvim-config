@@ -101,12 +101,10 @@ return require 'packer'.startup(function(use)
   })
 
   -- LSP addons
-
-
-
   use "jose-elias-alvarez/nvim-lsp-ts-utils"
   use 'jose-elias-alvarez/typescript.nvim'
-
+  -- Formatter (Used for JS & TS files)
+  use { 'mhartington/formatter.nvim' }
   -- Rust
   use "simrat39/rust-tools.nvim"
   -- Debugging

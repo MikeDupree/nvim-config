@@ -1,6 +1,6 @@
 local null_ls_status_ok, null_ls = pcall(require, "null-ls")
 if not null_ls_status_ok then
-	return
+  return
 end
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
@@ -9,14 +9,21 @@ local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup({
-	debug = false,
-	sources = {
-        formatting.prettier,
-        formatting.black.with({ extra_args = { "--fast" } }),
-        formatting.stylua,
-        null_ls.builtins.diagnostics.eslint.with({
-            prefer_local = "node_modules/.bin",
-        }),
+  debug = false,
+  sources = {
+    formatting.prettier.with({
+      filetypes = {
+        "javascript", "typescript", "css", "scss", "html", "json", "yaml", "markdown", "graphql", "md", "txt",
+      },
+    }),
+    formatting.black.with({ extra_args = { "--fast" } }),
+    formatting.stylua,
+    null_ls.builtins.diagnostics.eslint.with({
+      prefer_local = "node_modules/.bin",
+    }),
     -- diagnostics.flake8
-	},
+  },
 })
+
+vim.cmd("autocmd BufWritePost * lua vim.lsp.buf.formatting_seq_sync()")
+

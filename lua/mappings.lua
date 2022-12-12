@@ -38,7 +38,7 @@ keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
 
 -- Formatting
-keymap("n", "<leader>w", ":lua vim.lsp.buf.format()<CR>", opts)
+keymap("n", "<leader>w", ":lua vim.lsp.buf.format()<CR> :FormatWrite <CR>", opts)
 
 -- Typescript
 keymap("n", "<leader>gs", ":TypescriptGoToSourceDefinition", opts)
