@@ -4,6 +4,11 @@ keymap("", "<Space>", "<Nop>", opts);
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Paste without losing the copy from register
+keymap('n', '<leader>p', "\"_dP", opts)
+
+-- Replacement
+keymap('n', '<C-r>', '\"hy:%s/<C-r>h//gc<left><left><left>', opts)
 
 -- Better window navigation
 keymap('n', '<C-j>', '<C-w>j', opts)

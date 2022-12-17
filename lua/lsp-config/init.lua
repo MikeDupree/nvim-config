@@ -30,13 +30,13 @@ require("typescript").setup({
       require("lsp-config.handlers").on_attach(client, bufnr)
 
       -- format on save
-      if client.server_capabilities.documentFormattingProvider then
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          group = vim.api.nvim_create_augroup("Format", { clear = true }),
-          buffer = bufnr,
-          callback = function() vim.lsp.buf.formatting_seq_sync() end
-        })
-      end
+      --      if client.server_capabilities.documentFormattingProvider then
+      --      vim.api.nvim_create_autocmd("BufWritePre", {
+      --      group = vim.api.nvim_create_augroup("Format", { clear = true }),
+      --    buffer = bufnr,
+      --  callback = function() vim.lsp.buf.formatting_seq_sync() end
+      -- })
+      --end
 
       -- defaults
       ts_utils.setup({
@@ -100,7 +100,7 @@ require("formatter").setup(
         function()
           return {
             exe = "prettier",
-            args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
+            args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
             stdin = true
           }
         end
@@ -110,7 +110,7 @@ require("formatter").setup(
         function()
           return {
             exe = "prettier",
-            args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
+            args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
             stdin = true
           }
         end
@@ -133,7 +133,7 @@ require("formatter").setup(
         function()
           return {
             exe = "prettier",
-            args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
+            args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
             stdin = true
           }
         end
@@ -143,7 +143,7 @@ require("formatter").setup(
         function()
           return {
             exe = "prettier",
-            args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
+            args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
             stdin = true
           }
         end
@@ -153,7 +153,7 @@ require("formatter").setup(
         function()
           return {
             exe = "prettier",
-            args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
+            args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
             stdin = true
           }
         end
@@ -163,7 +163,7 @@ require("formatter").setup(
         function()
           return {
             exe = "luafmt",
-            args = {"--indent-count", 2, "--stdin"},
+            args = { "--indent-count", 2, "--stdin" },
             stdin = true
           }
         end
@@ -171,4 +171,3 @@ require("formatter").setup(
     }
   }
 )
-
