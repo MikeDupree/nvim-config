@@ -1,23 +1,15 @@
 --
 -- Dupe NVIM Config
 --
-require('plugins')
-require('settings')
+
 require('mappings')
-require('colors')
+require('plugins')
+require('telescope')
+require('mytheme')
 require('treesitter')
 require('completion')
-require('lsp-config')
-require('lsp-saga-config')
-require('rust-tools-config')
-require('file-explorer')
-require('telescope')
-require('indent-config')
-require('git-config')
-require('lualine-config')
--- Syntax highlighting JS/TS
-require('lspconfig/quick_lint_js').setup {}
-
--- Noone likes you swap
-vim.opt.swapfile = false
-vim.opt.backup = false
+require('myharpoon')
+require('undootree')
+require('myfugitive')
+require('lsp')
+require('lua_line')	

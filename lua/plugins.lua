@@ -46,14 +46,31 @@ return require 'packer'.startup(function(use)
   use "nvim-lua/plenary.nvim"
 
   use 'sainnhe/sonokai' --Color Scheme
-  use 'RRethy/nvim-base16'
-  use 'EdenEast/nightfox.nvim'
+  use({
+    'rose-pine/neovim',
+    as = 'rose-pine',
+    config = function()
+--        vim.cmd('colorscheme rose-pine')
+    end
+}) 
+
+  -- Telescope Fuzzy Finder
+  use { "nvim-telescope/telescope.nvim", tag = '0.1.0' }
+  -- Harpoon
+  use 'ThePrimeagen/harpoon'
+
+  -- Undo Tree
+  use 'mbbill/undotree'
+
+  -- Git commands
+  use 'tpope/vim-fugitive'
 
   -- TreeSitter
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
+  use 'nvim-treesitter/playground'
 
   -- LUA line
   use {
@@ -65,76 +82,27 @@ return require 'packer'.startup(function(use)
     requires = "nvim-treesitter/nvim-treesitter"
   }
 
-  use "p00f/nvim-ts-rainbow"
-
-  -- cmp plugins
-  use "hrsh7th/nvim-cmp" -- The completion plugin
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
-
-  -- snippets
-  use "L3MON4D3/LuaSnip" --snippet engine
-  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
-
-  -- LSP
-  use "neovim/nvim-lspconfig" -- configuration for nvim lsp
-  use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/cmp-nvim-lua"
-  use "williamboman/mason.nvim" -- language server installer
-  use "williamboman/mason-lspconfig.nvim"
-  use "MunifTanjim/prettier.nvim"
-  use({
-    "glepnir/lspsaga.nvim",
-    branch = "main",
-    config = function()
-      local saga = require("lspsaga")
-
-      saga.init_lsp_saga({
-        -- your configuration
-        symbol_in_winbar = {
-          in_custom = true
-        }
-      })
-    end,
-  })
-
-  -- LSP addons
-  use "jose-elias-alvarez/nvim-lsp-ts-utils"
-  use 'jose-elias-alvarez/typescript.nvim'
-  -- Formatter (Used for JS & TS files)
-  use { 'mhartington/formatter.nvim' }
-  -- Rust
-  use "simrat39/rust-tools.nvim"
-  -- Debugging
-  use 'mfussenegger/nvim-dap'
-  -- Telescope
-  use { "nvim-telescope/telescope.nvim", tag = '0.1.0' }
-  use 'nvim-telescope/telescope-media-files.nvim'
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  -- File Explore via nvim-tree
   use {
-    'nvim-tree/nvim-tree.lua',
-    requires = {
-      'nvim-tree/nvim-web-devicons', -- optional, for file icons
-    },
-    tag = 'nightly' -- optional, updated every week. (see issue #1193)
-  }
-  use "dinhhuy258/git.nvim"
-  -- Display line indents
-  use "lukas-reineke/indent-blankline.nvim"
-  -- Auto add matching bracket
-  use {
-    "windwp/nvim-autopairs",
-    config = function() require("nvim-autopairs").setup {} end
-  }
-  use { "windwp/nvim-ts-autotag",
-    config = function()
-      local status, autotag = pcall(require, "nvim-ts-autotag")
-      if (not status) then return end
-      autotag.setup({})
-    end
+	  'VonHeikemen/lsp-zero.nvim',
+	  requires = {
+		  -- LSP Support
+		  {'neovim/nvim-lspconfig'},
+		  {'williamboman/mason.nvim'},
+		  {'williamboman/mason-lspconfig.nvim'},
+
+		  -- Autocompletion
+		  {'hrsh7th/nvim-cmp'},
+		  {'hrsh7th/cmp-buffer'},
+		  {'hrsh7th/cmp-path'},
+		  {'saadparwaiz1/cmp_luasnip'},
+		  {'hrsh7th/cmp-nvim-lsp'},
+		  {'hrsh7th/cmp-nvim-lua'},
+
+		  -- Snippets
+		  {'L3MON4D3/LuaSnip'},
+		  {'rafamadriz/friendly-snippets'},
+	  }
   }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
