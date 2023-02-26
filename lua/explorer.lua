@@ -18,7 +18,7 @@ require("nvim-tree").setup({
         adaptive_size = true,
         mappings = {
             list = {
-                { key = "u", action = "dir_up" },
+--                { key = "u", action = "dir_up" },
             },
         },
     },
@@ -51,8 +51,8 @@ require("nvim-tree").setup({
                 symlink = "",
                 bookmark = "",
                 folder = {
-                    arrow_closed = "├",
-                    arrow_open = "├",
+                    arrow_closed = "⊧",
+                    arrow_open = "⊦",
                     default = "",
                     open = "",
                     empty = "",
