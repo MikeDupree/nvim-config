@@ -5,7 +5,6 @@ lsp.preset('recommended')
 lsp.ensure_installed({
 	'tsserver',
 	'eslint',
-	'sumneko_lua',
 	'rust_analyzer',
 })
 
@@ -36,8 +35,6 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "[d", function() vim.lsp.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "]d", function() vim.lsp.diagnostic.goto_prev() end, opts)
     vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_actions() end, opts)
-    vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.code_actions() end, opts)
-    vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.code_actions() end, opts)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
     end)
 
