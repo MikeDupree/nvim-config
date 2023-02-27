@@ -56,6 +56,7 @@ return require 'packer'.startup(function(use)
 
     -- Telescope Fuzzy Finder
     use { "nvim-telescope/telescope.nvim", tag = '0.1.0' }
+
     -- Harpoon
     use 'ThePrimeagen/harpoon'
 
@@ -70,6 +71,7 @@ return require 'packer'.startup(function(use)
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
     }
+
     use 'nvim-treesitter/playground'
 
     -- nvim tree (file explorer)

@@ -54,7 +54,6 @@ require("nvim-tree").setup({
         bookmark = "",
         folder = {
           arrow_closed = "└",
-          edge = "",
           arrow_open = "└",
           default = "",
           open = "",
