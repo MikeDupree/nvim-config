@@ -46,6 +46,7 @@ return require 'packer'.startup(function(use)
     use "nvim-lua/plenary.nvim"
 
     use 'sainnhe/sonokai' --Color Scheme
+    use 'ofirgall/ofirkai.nvim'
     use({
         'rose-pine/neovim',
         as = 'rose-pine',

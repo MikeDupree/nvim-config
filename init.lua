@@ -4,7 +4,7 @@
 
 require('mappings')
 require('plugins')
-require('telescope')
+require('mytelescope')
 require('mytheme')
 require('treesitter')
 require('completion')
