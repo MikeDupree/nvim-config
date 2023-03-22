@@ -2,10 +2,10 @@
 -- Dupe NVIM Config
 --
 
-require('mappings')
+
 require('plugins')
-require('telescope')
 require('mytheme')
+require('mappings')
 require('treesitter')
 require('completion')
 require('myharpoon')
@@ -15,3 +15,5 @@ require('lsp')
 require('lua_line')
 require('settings')
 require('explorer')
+require('mytelescope')
+require('mycomments')

@@ -2,12 +2,8 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- set termguicolors to enable highlight groups
-vim.opt.termguicolors = true
-
-
--- OR setup with some options
 require("nvim-tree").setup({
+
     sort_by = "case_sensitive",
     git = {
         enable = true,
@@ -18,7 +14,7 @@ require("nvim-tree").setup({
         adaptive_size = true,
         mappings = {
             list = {
-                { key = "u", action = "dir_up" },
+--                { key = "u", action = "dir_up" },
             },
         },
     },
@@ -29,7 +25,7 @@ require("nvim-tree").setup({
             inline_arrows = true,
             icons = {
                 corner = "└",
-                edge = "",
+                edge = "|",
                 item = "|",
                 bottom = "─",
                 none = " ",
@@ -61,8 +57,8 @@ require("nvim-tree").setup({
                     symlink_open = "",
                 },
                 git = {
-                    unstaged = "✗",
-                    staged = "",
+                    unstaged = "U",
+                    staged = "S",
                     unmerged = "",
                     renamed = "➜",
                     untracked = "",
