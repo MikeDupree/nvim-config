@@ -1,6 +1,8 @@
 local keymap = vim.api.nvim_set_keymap
 local keymap2 = vim.keymap.set
 local opts = { noremap = true }
+
+
 keymap("", "<Space>", "<Nop>", opts);
 
 vim.g.mapleader = " "
@@ -27,7 +29,7 @@ keymap2("n", "n", "nzzzv")
 keymap2("n", "N", "Nzzzv")
 
 -- Copy to system clipboard
-keymap2({"n", "v"}, "<leader>y", [["+y]])
+keymap2({ "n", "v" }, "<leader>y", [["+y]])
 keymap2("n", "<leader>Y", [["+Y]])
 
 -- Remove Ex mode keymap
@@ -68,7 +70,16 @@ keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-p>", ":bprevious<CR>", opts)
 
+-- Fuzzy Finder
 keymap("n", "<leader>ff",
   "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
   opts)
 keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
+--keymap('n', "<leader>fG", custom_tele.live_grep_hidden, opts)
+-- Show cursor diagnostic
+keymap("n", "<leader>cd", "<cmd>lua vim.diagnostic.open_float()<CR>", { silent = true })
+
+-- GIT
+keymap('n', '<Leader>gg', '<cmd>LazyGit<CR>', opts)
+--vim.keymap.set('n', '<Leader>gb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
+keymap('n', '<Leader>gB', '<cmd>Gitsigns blame_line<CR>', opts)

@@ -1,14 +1,25 @@
-
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
   return
 end
 
+local transform_mod = require('telescope.actions.mt').transform_mod
+local actions = require('telescope.actions')
+local mod = {}
+mod.open_in_nvim_tree = function(prompt_bufnr)
+  local cur_win = vim.api.nvim_get_current_win()
+  vim.cmd("NvimTreeFindFile")
+  vim.api.nvim_set_current_win(cur_win)
+end
+
+mod = transform_mod(mod)
+
+
 --telescope.load_extension('media_files')
 
 local actions = require "telescope.actions"
 
-telescope.setup {
+require("telescope").setup{
   defaults = {
 
     prompt_prefix = " ",
@@ -28,7 +39,7 @@ telescope.setup {
         ["<Down>"] = actions.move_selection_next,
         ["<Up>"] = actions.move_selection_previous,
 
-        ["<CR>"] = actions.select_default,
+        ["<CR>"] = actions.select_default + mod.open_in_nvim_tree,
         ["<C-x>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
@@ -49,7 +60,7 @@ telescope.setup {
 
       n = {
         ["<esc>"] = actions.close,
-        ["<CR>"] = actions.select_default,
+        ["<CR>"] = actions.select_default + mod.open_in_nvim_tree,
         ["<C-x>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
@@ -80,7 +91,7 @@ telescope.setup {
       },
     },
   },
-  -- pickers = {
+  pickers = {
     -- Default configuration for builtin pickers goes here:
     -- picker_name = {
     --   picker_config_key = value,
@@ -88,14 +99,17 @@ telescope.setup {
     -- }
     -- Now the picker_config_key will be applied every time you call this
     -- builtin picker
-  -- },
+    find_files = {
+      find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+    }
+  },
   extensions = {
     media_files = {
-        -- filetypes whitelist
-        -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-        filetypes = {"png", "webp", "jpg", "jpeg"},
-        find_cmd = "rg" -- find command (defaults to `fd`)
-      }
+      -- filetypes whitelist
+      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+      filetypes = { "png", "webp", "jpg", "jpeg" },
+      find_cmd = "rg" -- find command (defaults to `fd`)
+    }
     -- Your extension configuration goes here:
     -- extension_name = {
     --   extension_config_key = value,
@@ -103,3 +117,16 @@ telescope.setup {
     -- please take a look at the readme of the extension you want to configure
   },
 }
+
+local mappings = {}
+
+mappings.curr_buf = function()
+  local opt = require('telescope.themes').get_dropdown({ winblend = 10 })
+  require('telescope.builtin').current_buffer_fuzzy_find(opt)
+end
+
+mappings.live_grep_hidden = function()
+  require('telescope.builtin').live_grep({ additional_args = { "--no-ignore", "--hidden" } })
+end
+
+return mappings
