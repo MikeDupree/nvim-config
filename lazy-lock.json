@@ -13,7 +13,9 @@
   "copilot.lua": { "branch": "master", "commit": "db62371b6eac73954c194f3c8faee36cffee8135" },
   "dupine": { "branch": "main", "commit": "8dd269c0e73d0f486547a76f310e94e354140fd4" },
   "fidget.nvim": { "branch": "main", "commit": "688b4fec4517650e29c3e63cfbb6e498b3112ba1" },
+  "git-blame.nvim": { "branch": "master", "commit": "bca910eb57a4b43388efefa15f70f22f5c23a061" },
   "gitsigns.nvim": { "branch": "main", "commit": "ca473e28382f1524aa3d2b6f04bcf54f2e6a64cb" },
+  "harpoon": { "branch": "master", "commit": "f7040fd0c44e7a4010369136547de5604b9c22a1" },
   "indent-blankline.nvim": { "branch": "master", "commit": "018bd04d80c9a73d399c1061fa0c3b14a7614399" },
   "lazy.nvim": { "branch": "main", "commit": "983aad3e79e6f7e3a65e1869d4116d627a9eaf28" },
   "lazygit.nvim": { "branch": "main", "commit": "32bffdebe273e571588f25c8a708ca7297928617" },
@@ -47,6 +49,7 @@
   "twilight.nvim": { "branch": "main", "commit": "2e13bd1886562b737f38c418ed542677b41ef5cb" },
   "undotree": { "branch": "master", "commit": "485f01efde4e22cb1ce547b9e8c9238f36566f21" },
   "vim-illuminate": { "branch": "master", "commit": "a2907275a6899c570d16e95b9db5fd921c167502" },
+  "vim-monokai-tasty": { "branch": "master", "commit": "8c1052347dd204a83ef72f7af36bdf2fa6861e0b" },
   "which-key.nvim": { "branch": "main", "commit": "87b1459b3e0be0340da2183fc4ec8a00b2960678" },
   "zen-mode.nvim": { "branch": "main", "commit": "d907e638c879642d226d27469b53db6925f69d4c" }
 }

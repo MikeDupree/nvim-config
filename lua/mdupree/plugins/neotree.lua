@@ -9,7 +9,7 @@ return {
 		vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1]])
 
 		require("neo-tree").setup({
-			close_if_last_window = true,
+			close_if_last_window = false,
 			filesystem = {
 				follow_current_file = true,
 				hijack_netrw_behavior = "open_current",

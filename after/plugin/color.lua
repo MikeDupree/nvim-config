@@ -1,10 +1,4 @@
-require("nightfox").setup({
-	options = {
-		transparent = true,
-	},
-})
-
-local colorscheme = "dupine"
+local colorscheme = "vim-monokai-tasty"
 
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 
