@@ -1,3 +1,4 @@
+
 -- Set up mason to manage LSPs.
 require("mason").setup()
 

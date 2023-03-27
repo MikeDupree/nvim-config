@@ -61,9 +61,13 @@ vim.keymap.set("n", "<Leader>gg", "<cmd>LazyGit<CR>", { desc = "[g]it lazy[g]it"
 vim.keymap.set("n", "<Leader>gb", "<cmd>Gitsigns toggle_current_line_blame<CR>", { desc = "[g]it toggle [b]lame" })
 vim.keymap.set("n", "<Leader>gB", "<cmd>Gitsigns blame_line<CR>", { desc = "[g]it [B]lame current line" })
 
+-- terminal
+vim.keymap.set("n", "<S-t>", "<cmd>ToggleTerm<CR>")
+vim.keymap.set("t", "<S-t>", "<cmd>ToggleTerm<CR>")
+
 -- Format File
 -- conflicts with workspace add
---vim.keymap.set("n", "<leader>w", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>w", vim.lsp.buf.format, { noremap = false })
 
 -- quickfix
 vim.keymap.set("n", "[q", vim.cmd.cprevious, { desc = "previous quickfix" })

@@ -1,6 +1,7 @@
 require("mdupree.settings")
 require("mdupree.lazy")
 require("mdupree.remap")
+require("mdupree.ui")
 
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
