@@ -22,8 +22,8 @@ return {
 	},
 	-- vim-monokai-tasty additional packages
 	"HerringtonDarkholme/yats.vim",
-	"pangloss/vim-javascript",
-	"MaxMEllon/vim-jsx-pretty",
+--	"pangloss/vim-javascript",
+--	"MaxMEllon/vim-jsx-pretty",
 	"styled-components/vim-styled-components",
 	"elzr/vim-json",
 	"jparise/vim-graphql",
