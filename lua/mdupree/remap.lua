@@ -42,6 +42,10 @@ vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>")
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>")
 vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>")
 
+-- indent selected text
+vim.keymap.set("v", "<", "<gv", { desc = "Indent selected text left" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent selected text right" })
+
 -- center line when using pg movement
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")

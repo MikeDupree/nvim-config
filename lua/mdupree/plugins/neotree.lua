@@ -13,7 +13,7 @@ return {
 			},
 			filesystem = {
 				follow_current_file = true,
-				hijack_netrw_behavior = "open_current",
+				hijack_netrw_behavior = "open_default",
 				components = {
 					harpoon_index = function(config, node, state)
 						local Marked = require("harpoon.mark")
@@ -21,7 +21,7 @@ return {
 						local succuss, index = pcall(Marked.get_index_of, path)
 						if succuss and index and index > 0 then
 							return {
-								text = string.format(" ⥤ %d", index), -- <-- Add your favorite harpoon like arrow here
+								text = string.format("  %d ", index), -- <-- Add your favorite harpoon like arrow here
 								highlight = config.highlight or "NeoTreeDirectoryIcon",
 							}
 						else
