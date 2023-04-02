@@ -1,12 +1,12 @@
 import something from something;
 
-interface test {
+interface Test {
   key1: boolean;
   key2: string;
   key3: number;
 }
 
-type test2 = string;
+type Test2 = string;
 
 const CONSTANT_BABY = '';
 
@@ -18,10 +18,20 @@ function testFunc(arg) {
   if (arg) {
     return;
   }
+
   const err = new Error();
 
   console.log();
   return arg ? arg === '' : var1;
+}
+
+class TestClass {
+  public a;
+  private b;
+
+  public testFunc() {
+   
+  }
 }
 
 const s = `
@@ -31,9 +41,9 @@ test string
 "test"
 
 try {
-  something
+  let something = 'test';
 }
-catch () {
+catch (err: any) {
   everything
 }
 // Comment
