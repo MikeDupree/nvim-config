@@ -2,6 +2,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-treesitter/playground",
+    "windwp/nvim-ts-autotag",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/nvim-treesitter-context",
@@ -13,18 +14,39 @@ return {
 			require("nvim-treesitter.configs").setup({
 				-- Add languages to be installed here that you want installed for treesitter
 				ensure_installed = {
-					"astro",
 					"help",
+					"python",
+					"vim",
+          "bash",
+					"css",
+					"dockerfile",
+					"gitcommit",
+					"gitignore",
+					"graphql",
+					"help",
+					"html",
+					"http",
+					"javascript",
+					"json",
 					"lua",
+					"make",
+					"markdown",
 					"php",
 					"prisma",
 					"python",
 					"rust",
+					"scss",
+					"svelte",
 					"typescript",
-					"vim",
+					"tsx",
+					"twig",
+					"yaml",
 				},
 				highlight = { enable = true },
 				indent = { enable = true },
+        autotag = {
+          enable = true
+        },
 				incremental_selection = {
 					enable = true,
 					keymaps = {

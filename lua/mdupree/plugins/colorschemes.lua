@@ -21,10 +21,12 @@ return {
         healthSuccess = { fg = c.green },
         healthWarning = { fg = c.orange },
         -- My additions
+        Directory = { fg = c.yelloww },
         Function = { fg = c.greenn }, -- Not seeing this
         Keyword = { fg = c.bluee },
         Special = { fg = c.redd },
         Identifier = { fg = c.redd },
+        graphqlFold = { fg = c.yelloww },
         Statement = { fg = c.redd },
         Structure = { fg = c.bluee },
         Struct = { fg = "#ffc0cb" },

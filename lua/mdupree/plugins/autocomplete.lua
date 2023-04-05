@@ -89,7 +89,7 @@ return {
 							fallback()
 						end
 					end, { "i", "s" }),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					["<S-CR>"] = cmp.mapping.confirm({ select = true }),
 					["<C-e>"] = cmp.mapping.abort(),
 				},
 				formatting = {

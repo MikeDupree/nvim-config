@@ -5,7 +5,8 @@ return {
 		dependencies = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" }, -- Required
-			{ -- Optional
+			{
+				-- Optional
 				"williamboman/mason.nvim",
 				build = function()
 					pcall(vim.cmd, "MasonUpdate")
@@ -25,6 +26,7 @@ return {
 		},
 		config = function()
 			local lsp = require("lsp-zero")
+
 			vim.opt.signcolumn = "yes"
 			lsp.preset("recommended")
 
@@ -65,7 +67,7 @@ return {
 					vim.lsp.buf.workspace_symbol()
 				end, opts)
 				vim.keymap.set("n", "<leader>vd", function()
-					vim.diagnostic.open_float()
+					vim.diagnostic.open_float({ focus = false })
 				end, opts)
 				vim.keymap.set("n", "[d", function()
 					vim.diagnostic.goto_next()
