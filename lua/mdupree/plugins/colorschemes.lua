@@ -1,6 +1,10 @@
 return {
+  { 'rose-pine/neovim', name = 'rose-pine', config = function ()
+    vim.cmd('colorscheme rose-pine')
+  end },
   -- Neon
   {
+    -- "navarasu/onedark.nvim",
     "rafamadriz/neon",
     config = function()
       local c = require("mdupree.neon.colors")
@@ -115,19 +119,19 @@ return {
         TSLiteral = { fg = c.fg },                                           -- Literal text.
         TSURI = { fg = c.purple },                                           -- Any URL like a link or email.
       }
-      local colorscheme = "neon"
-      local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
-
-      if not status_ok then
-        vim.notify("colorscheme " .. colorscheme .. " not installed!")
-        return
-      end
-      vim.opt.termguicolors = true
-
-      vim.g.neon_style = "dark"
-      vim.g.neon_transparent = true
-      vim.g.neon_bold = true
-      vim.api.nvim_set_hl(0, 'typescriptMember', { fg = "#ffffff", bg = "#333333" })
+      -- local colorscheme = "neon"
+      -- local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+      --
+      -- if not status_ok then
+      --   vim.notify("colorscheme " .. colorscheme .. " not installed!")
+      --   return
+      -- end
+      -- vim.opt.termguicolors = true
+      --
+      -- vim.g.neon_style = "dark"
+      -- vim.g.neon_transparent = true
+      -- vim.g.neon_bold = true
+      -- vim.api.nvim_set_hl(0, 'typescriptMember', { fg = "#ffffff", bg = "#333333" })
 
     end,
   },

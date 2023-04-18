@@ -19,6 +19,10 @@ vim.keymap.set("n", "<Leader>fB", custom_tele.curr_buf, { desc = "[f]ind in curr
 vim.keymap.set("n", "<Leader>fG", custom_tele.live_grep_hidden, { desc = "[f]ind [G]rep hidden" })
 vim.keymap.set("n", "<Leader>u", "<cmd>UndotreeToggle<CR>", { desc = "[u]ndotree toggle" })
 
+-- Yank to system clipboard
+vim.keymap.set("n", "<c-c>", '"*y :let @+=@*<CR>')
+vim.keymap.set("n", "<c-v>", '"+p')
+
 -- Replace all occurrences of word
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 

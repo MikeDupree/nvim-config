@@ -14,6 +14,10 @@ return {
 			filesystem = {
 				follow_current_file = true,
 				hijack_netrw_behavior = "open_default",
+				use_libuv_file_watcher = true,
+				filtered_items = {
+					visible = true,
+				},
 				components = {
 					harpoon_index = function(config, node, state)
 						local Marked = require("harpoon.mark")
