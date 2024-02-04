@@ -90,7 +90,7 @@ return {
 						end
 					end, { "i", "s" }),
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<C-e>"] = cmp.mapping.abort(),
+					["<C-CR>"] = cmp.mapping.abort(),
 				},
 				formatting = {
 					fields = { "kind", "abbr", "menu" },

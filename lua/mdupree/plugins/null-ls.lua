@@ -13,7 +13,7 @@ return {
     })
 
     require("null-ls").setup({})
-
-    require("mason-null-ls").setup_handlers({})
+    -- TODO This throws error on mac
+    --require("mason-null-ls").setup_handlers({})
   end,
 }

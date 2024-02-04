@@ -13,7 +13,6 @@ return {
 				-- Add languages to be installed here that you want installed for treesitter
 				ensure_installed = {
 					"astro",
-					"help",
 					"lua",
 					"php",
 					"prisma",

@@ -12,7 +12,9 @@ return {
 				width = 35,
 			},
 			filesystem = {
-				follow_current_file = true,
+				follow_current_file = {
+          enabled= true,
+        },
 				hijack_netrw_behavior = "open_default",
 				components = {
 					harpoon_index = function(config, node, state)

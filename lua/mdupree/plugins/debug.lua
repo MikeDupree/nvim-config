@@ -16,7 +16,7 @@ return {
         "php",
       },
     })
-    require("mason-nvim-dap").setup_handlers()
+    --require("mason-nvim-dap").setup_handlers()
 
     dap.adapters.php = {
       type = "executable",

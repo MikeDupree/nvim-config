@@ -1,3 +1,21 @@
+-- save file
+vim.keymap.set("n", "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+
+-- quit
+vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
+
+-- copy to clipboard
+vim.keymap.set("n", "<leader>y", "+y", { desc = "Copy to clipboard" })
+-- paste from clipboard
+vim.keymap.set("n", "<leader>p", "+p", { desc = "Past from clipboard" })
+
+-- Yank to system clipboard
+--vim.keymap.set("n", "<C-c>", '"*y :let @+=@*<CR>')
+--vim.keymap.set("n", "<C-v>", '"+p')
+
+-- lazy
+vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+
 -- explorer
 vim.keymap.set("n", "<Leader>e", "<cmd>NeoTreeShowToggle<CR>", { desc = "[e]xplore files" })
 
@@ -61,7 +79,9 @@ vim.keymap.set("n", "<Leader>z", "<cmd>ZenMode<CR>", { desc = "[z]en mode" })
 vim.keymap.set("n", "<Leader><Leader>", "<cmd>source<CR>", { desc = "<leader>source current file" })
 
 -- git
+-- TODO Install lazygit
 vim.keymap.set("n", "<Leader>gg", "<cmd>LazyGit<CR>", { desc = "[g]it lazy[g]it" })
+-- TODO install Gitsigns to make this work
 vim.keymap.set("n", "<Leader>gb", "<cmd>Gitsigns toggle_current_line_blame<CR>", { desc = "[g]it toggle [b]lame" })
 vim.keymap.set("n", "<Leader>gB", "<cmd>Gitsigns blame_line<CR>", { desc = "[g]it [B]lame current line" })
 
@@ -83,3 +103,10 @@ vim.keymap.set("n", "Q", "<nop>")
 
 -- Paste over text (replace text enters void buffer)
 vim.keymap.set("x", "<leader>p", [["_dP]])
+
+--Harpoon keymaps set in harpoon.lua
+--vim.keymap.set("n", "<leader>hh", ui.toggle_quick_menu, { desc = "Harpoon: quick menu" })
+--vim.keymap.set("n", "<leader>ha", safe_mark(mark.add_file), { desc = "Harpoon: add file" })
+--vim.keymap.set("n", "<leader>hr", mark.rm_file, { desc = "Harpoon: remove file" })
+--vim.keymap.set("n", "<leader>hx", mark.clear_all, { desc = "Harpoon: clear all" })
+
