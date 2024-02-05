@@ -41,10 +41,10 @@ return {
 			-- Returns the current VIM Mode
 			local function get_mode()
 				local mode_symbol = {
-					n = "🔰",
-					i = "I",
-					v = "v",
-					[""] = "^V",
+					n = "𝓃",
+					i = "𝒾",
+					v = "𝓋",
+					[""] = "^𝓋",
 					V = "V",
 					c = "⚡",
 					no = "no",
@@ -191,7 +191,7 @@ return {
 			-- LEFT Sections
 			-- ( place your components in order of left to right )
 			---
-			left_sections = {
+			local left_sections = {
 				-- section_separators = { left = '', right = '' },
 				{
 					function()
@@ -263,7 +263,7 @@ return {
 				{
 					-- Lsp server name .
 					get_lsp_server_name,
-					icon = "",
+					icon = "♨",
 					color = { fg = colors.fg, gui = "bold" },
 					padding = { left = 1, right = 0 }, -- We don't need space before this
 				},
@@ -283,10 +283,10 @@ return {
 
 				{
 					"diff",
-					symbols = { added = " ", modified = "柳", removed = " " },
+					symbols = { added = " ", modified = "⚠", removed = " " },
 					diff_color = {
 						added = { fg = colors.green },
-						modified = { fg = colors.orange },
+						modified = { fg = colors.yellow },
 						removed = { fg = colors.red },
 					},
 					cond = conditions.hide_in_width,

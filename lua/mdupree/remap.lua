@@ -17,7 +17,7 @@ vim.keymap.set("n", "<leader>p", "+p", { desc = "Past from clipboard" })
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
 -- explorer
-vim.keymap.set("n", "<Leader>e", "<cmd>NeoTreeShowToggle<CR>", { desc = "[e]xplore files" })
+vim.keymap.set("n", "<Leader>e", "<cmd>Neotree toggle<CR>", { desc = "[e]xplore files" })
 
 -- splits
 vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split window below" })
