@@ -1,9 +1,11 @@
+-- Remove for Conform
 return {
   "jay-babu/mason-null-ls.nvim",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "williamboman/mason.nvim",
     "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
   },
   config = function()
     require("mason").setup()
@@ -13,7 +15,5 @@ return {
     })
 
     require("null-ls").setup({})
-    -- TODO This throws error on mac
-    --require("mason-null-ls").setup_handlers({})
   end,
 }
