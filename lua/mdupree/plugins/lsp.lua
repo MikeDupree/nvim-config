@@ -14,6 +14,7 @@ return {
       { "williamboman/mason-lspconfig.nvim" }, -- Optional
       -- Autocompletion
       { "hrsh7th/nvim-cmp" },               -- Required
+
       { "hrsh7th/cmp-nvim-lsp" },           -- Required
       { "hrsh7th/cmp-buffer" },             -- Optional
       { "hrsh7th/cmp-path" },               -- Optional
@@ -67,7 +68,10 @@ return {
           { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
         },
       },
-      { "quangnguyen30192/cmp-nvim-ultisnips" },
+      config = function()
+        require("luasnip").filetype_extend("javascript", { "javascriptreact" })
+        require("luasnip").filetype_extend("javascript", { "html" })
+      end,
       {
         "SmiteshP/nvim-navic",
         dependencies = { "neovim/nvim-lspconfig" },
@@ -172,7 +176,6 @@ return {
       cmp.setup({
         sources = {
           { name = "nvim_lsp" },
-          { name = "ultisnips" },
           { name = "buffer" },
         },
         --- (Optional) Show source name in completion menu
