@@ -14,14 +14,13 @@ return {
       { "williamboman/mason-lspconfig.nvim" }, -- Optional
       -- Autocompletion
       { "hrsh7th/nvim-cmp" },               -- Required
-
       { "hrsh7th/cmp-nvim-lsp" },           -- Required
       { "hrsh7th/cmp-buffer" },             -- Optional
       { "hrsh7th/cmp-path" },               -- Optional
-      { "saadparwaiz1/cmp_luasnip" },       -- Optional
       { "hrsh7th/cmp-nvim-lua" },           -- Optional
+      --{ "saadparwaiz1/cmp_luasnip" },       -- Optional
       -- Signature Help
-      { "folke/neodev.nvim",                opts = {} }, -- Optional
+      --{ "folke/neodev.nvim",                opts = {} }, -- Optional
       -- Snippets
       {
         "L3MON4D3/LuaSnip",
@@ -130,7 +129,7 @@ return {
       end
 
       -- vim.opt.statusline = status_line()
-      vim.opt.winbar = status_line()
+      -- vim.opt.winbar = status_line()
 
       lsp.preset("recommended")
 
@@ -175,8 +174,10 @@ return {
       local cmp_format = require("lsp-zero").cmp_format()
       cmp.setup({
         sources = {
-          { name = "nvim_lsp" },
-          { name = "buffer" },
+          { name = "luasnip" },
+          { name = "nvim_lsp", max_item_count = 6 },
+          { name = "buffer",   max_item_count = 6 },
+          { name = "path" },
         },
         --- (Optional) Show source name in completion menu
         --formatting = cmp_format,
