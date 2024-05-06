@@ -4,6 +4,7 @@ return {
     "rcarriga/nvim-dap-ui",
     "williamboman/mason.nvim",
     "jay-babu/mason-nvim-dap.nvim",
+    "nvim-neotest/nvim-nio",
   },
   config = function()
     local dap = require("dap")
@@ -31,9 +32,9 @@ return {
         name = "Listen for Xdebug (Default global)",
         port = 9003,
         pathMappings = {
-              ["/app"] = "${workspaceFolder}",
+          ["/app"] = "${workspaceFolder}",
         },
-      }
+      },
     }
 
     -- load the vscode launch config if present
@@ -53,12 +54,12 @@ return {
     vim.keymap.set("n", "<F3>", dap.step_out)
     vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, { desc = "DAP: Toggle [b]reakpoint" })
     vim.keymap.set("n", "<leader>B", function()
-      dap.set_breakpoint(vim.fn.input "Breakpoint condition: ")
+      dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
     end, { desc = "DAP: [B]reakpoint with condition" })
     vim.keymap.set("n", "<leader>dc", dapui.close, { desc = "DAP: [d]ebug ui [c]lose" })
 
     -- Dap UI setup
-    dapui.setup {
+    dapui.setup({
       icons = { expanded = "▾", collapsed = "▸", current_frame = "*" },
       controls = {
         icons = {
@@ -72,7 +73,7 @@ return {
           terminate = "⏹",
         },
       },
-    }
+    })
 
     dap.listeners.after.event_initialized["dapui_config"] = dapui.open
     dap.listeners.before.event_terminated["dapui_config"] = dapui.close

@@ -140,6 +140,7 @@ return {
           timeout_ms = 10000,
         },
         servers = {
+          ["pyright"] = { "python" },
           ["tsserver"] = { "javascript", "typescript" },
           ["rust_analyzer"] = { "rust" },
         },
@@ -157,7 +158,15 @@ return {
       --
       require("mason").setup({})
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "tsserver", "rust_analyzer", "yamlls", "tailwindcss", "jsonls" },
+        ensure_installed = {
+          "lua_ls",
+          "tsserver",
+          "rust_analyzer",
+          "yamlls",
+          "tailwindcss",
+          "jsonls",
+          "pyright",
+        },
         handlers = {
           lsp.default_setup,
           lua_ls = function()
@@ -174,6 +183,9 @@ return {
       local cmp_format = require("lsp-zero").cmp_format()
       cmp.setup({
         sources = {
+          -- Uncomment for copilot to show in completion menu
+          -- Personally i don't like it
+          --{ name = "copilot" },
           { name = "luasnip" },
           { name = "nvim_lsp", max_item_count = 6 },
           { name = "buffer",   max_item_count = 6 },
@@ -193,6 +205,7 @@ return {
               buffer = "🗄",
               path = "🖫",
               nvim_lua = "Π",
+              copilot = "🚀",
             }
 
             item.menu = menu_icon[entry.source.name]
@@ -200,6 +213,16 @@ return {
           end,
         },
         mapping = {
+          --Copilot Section
+          -- This is neceaary for copilot to work with cmp
+          -- https://lsp-zero.netlify.app/v3.x/guide/setup-copilot-lua-plus-nvim-cmp.html
+          --["<CR>"] = cmp.mapping.confirm({
+          -- documentation says this is important.
+          -- I don't know why.
+          --behavior = cmp.ConfirmBehavior.Replace,
+          --select = false,
+          --}),
+          --END Copilot Section
           ["<C-y>"] = cmp.mapping.confirm({ select = false }),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<Up>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
