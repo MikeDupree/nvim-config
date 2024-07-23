@@ -41,6 +41,7 @@ return {
           "vim",
           "vimdoc",
           "yaml",
+          "gdscript",
         },
         highlight = { enable = true },
         indent = { enable = true },

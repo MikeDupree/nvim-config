@@ -4,8 +4,10 @@ return {
     version = "v3.x",
     dependencies = {
       -- LSP Support
-      { "neovim/nvim-lspconfig" }, -- Required
-      {                         -- Optional
+      {
+        "neovim/nvim-lspconfig",
+      }, -- Required
+      { -- Optional
         "williamboman/mason.nvim",
         build = function()
           pcall(vim.cmd, "MasonUpdate")
@@ -103,7 +105,6 @@ return {
       -- config
       --
       local lsp = require("lsp-zero")
-      local navic = require("nvim-navic")
 
       vim.opt.signcolumn = "yes"
       local function status_line()
@@ -143,6 +144,8 @@ return {
           ["pyright"] = { "python" },
           ["tsserver"] = { "javascript", "typescript" },
           ["rust_analyzer"] = { "rust" },
+          -- Add this for Godot support
+          --["gdtoolkit"] = { "gdscript" },
         },
       })
 
@@ -171,7 +174,9 @@ return {
           lsp.default_setup,
           lua_ls = function()
             local lua_opts = lsp.nvim_lua_ls()
-            require("lspconfig").lua_ls.setup(lua_opts)
+            local lspconfig = require("lspconfig")
+            lspconfig.lua_ls.setup(lua_opts)
+            lspconfig.eslint.setup({})
           end,
         },
       })
@@ -180,7 +185,6 @@ return {
       -- CMP Configuration
       --
       local cmp = require("cmp")
-      local cmp_format = require("lsp-zero").cmp_format()
       cmp.setup({
         sources = {
           -- Uncomment for copilot to show in completion menu
