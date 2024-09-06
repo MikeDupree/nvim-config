@@ -105,6 +105,9 @@ return {
       })
 
       require("treesitter-context").setup({
+        max_lines = 2,
+        max_window_height = 2,
+        multiline_threshold = 2,
         patterns = {
           typescript = {
             "const",

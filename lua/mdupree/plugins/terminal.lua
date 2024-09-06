@@ -1,7 +1,7 @@
 return {
-	{
-		"akinsho/toggleterm.nvim",
-		version = "*",
-		opts = {},
-	},
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    opts = {},
+  },
 }
