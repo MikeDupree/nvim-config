@@ -42,6 +42,7 @@ return {
           "vimdoc",
           "yaml",
           "gdscript",
+          "dockerfile",
         },
         highlight = { enable = true },
         indent = { enable = true },

@@ -1,297 +1,246 @@
+-- Define dependencies
+local lsp_required_dependencies = {
+  { "neovim/nvim-lspconfig" },
+  -- Autocompletion
+  { "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-nvim-lsp" },
+}
+
+local lsp_optional_dependencies = {
+  {
+    "williamboman/mason.nvim",
+    build = function()
+      pcall(function()
+        vim.cmd("MasonUpdate")
+      end)
+    end,
+  },
+  { "williamboman/mason-lspconfig.nvim" },
+  -- Autocompletion
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
+  { "hrsh7th/cmp-nvim-lua" },
+}
+
+local lsp_dependencies = vim.list_extend(vim.deepcopy(lsp_required_dependencies), lsp_optional_dependencies)
+
+local luasnip_dependencies = {
+  "rafamadriz/friendly-snippets",
+  {
+    "nvim-cmp",
+    dependencies = {
+      "saadparwaiz1/cmp_luasnip",
+    },
+    opts = function(_, opts)
+      opts.snippet = {
+        expand = function(args)
+          require("luasnip").lsp_expand(args.body)
+        end,
+      }
+    end,
+  },
+}
+
+local luasnip_opts = {
+  history = true,
+  delete_check_events = "TextChanged",
+}
+
+local luasnip_keys = {
+  {
+    "<tab>",
+    function()
+      return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+    end,
+    expr = true,
+    silent = true,
+    mode = "i",
+  },
+  {
+    "<tab>",
+    function()
+      require("luasnip").jump(1)
+    end,
+    mode = "s",
+  },
+  {
+    "<s-tab>",
+    function()
+      require("luasnip").jump(-1)
+    end,
+    mode = { "i", "s" },
+  },
+}
+
+local navic_config = function()
+  local icons = require("mdupree.icons")
+  require("nvim-navic").setup({ icons = icons.kinds })
+
+  vim.api.nvim_create_augroup("LspAttach_navic", {})
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = "LspAttach_navic",
+    callback = function(args)
+      if not (args.data and args.data.client_id) then
+        return
+      end
+      local bufnr = args.buf
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client.server_capabilities.documentSymbolProvider then
+        require("nvim-navic").attach(client, bufnr)
+      end
+    end,
+  })
+end
+
+local lsp_config = function()
+  local lsp = require("lsp-zero")
+
+  vim.opt.signcolumn = "yes"
+
+  -- LSP Setup
+  lsp.preset("recommended")
+  lsp.format_on_save({
+    format_opts = { async = false, timeout_ms = 10000 },
+    servers = {
+      ["pyright"] = { "python" },
+      ["tsserver"] = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+      ["rust_analyzer"] = { "rust" },
+    },
+  })
+
+  lsp.set_sign_icons({
+    error = "✘",
+    warn = "▲",
+    hint = "⚑",
+    info = "»",
+  })
+
+  -- Mason setup
+  require("mason").setup({})
+  require("mason-lspconfig").setup({
+    ensure_installed = {
+      "lua_ls",
+
+      "ts_ls",
+      "rust_analyzer",
+      "yamlls",
+      "tailwindcss",
+      "jsonls",
+      "pyright",
+    },
+    handlers = {
+      lua_ls = function()
+        local lua_opts = lsp.nvim_lua_ls()
+        require("lspconfig").lua_ls.setup(lua_opts)
+
+        require("lspconfig").eslint.setup({
+          cmd = { "vscode-eslint-language-server", "--stdio" },
+          filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+          -- settings = {
+          --   -- ESLint settings
+          -- },
+        })
+      end,
+      tsserver = function()
+        require("lspconfig").tsserver.setup({
+          on_attach = function(client, bufnr)
+            -- Attach any custom behavior you want for tsserver here
+            lsp.default_keymaps({ buffer = bufnr })
+            lsp.buffer_autoformat()
+          end,
+          capabilities = lsp.capabilities,
+        })
+      end,
+      -- Default handler for other servers
+      function(server_name)
+        lsp.default_setup(server_name)
+      end,
+      -- function(server_name)
+      --   if server_name == "tsserver" then
+      --     server_name = "ts_ls"
+      --   else
+      --     lsp.default_setup(server_name)
+      --   end
+      -- end,
+    },
+  })
+
+  -- CMP setup
+  local cmp = require("cmp")
+  cmp.setup({
+    sources = {
+      { name = "luasnip" },
+      { name = "nvim_lsp", max_item_count = 6 },
+      { name = "buffer",   max_item_count = 6 },
+      { name = "path" },
+    },
+    formatting = {
+      fields = { "menu", "abbr", "kind" },
+      format = function(entry, item)
+        local menu_icon = {
+          nvim_lsp = "🛠",
+          luasnip = "🔨",
+          buffer = "🗄",
+          path = "🖫",
+          nvim_lua = "Π",
+          copilot = "🚀",
+        }
+        item.menu = menu_icon[entry.source.name]
+        return item
+      end,
+    },
+    mapping = {
+      ["<C-y>"] = cmp.mapping.confirm({ select = false }),
+      ["<C-e>"] = cmp.mapping.abort(),
+      ["<Up>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
+      ["<Down>"] = cmp.mapping.select_next_item({ behavior = "select" }),
+    },
+    snippet = {
+      expand = function(args)
+        require("luasnip").lsp_expand(args.body)
+      end,
+    },
+  })
+
+  lsp.on_attach(function(client, bufnr)
+    lsp.default_keymaps({ buffer = bufnr })
+    lsp.buffer_autoformat()
+
+    local opts = { buffer = bufnr, remap = false }
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "td", vim.lsp.buf.type_definition, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
+    vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
+    vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
+    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
+    vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
+    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+  end)
+
+  lsp.setup()
+end
+
+-- Final simplified return
 return {
   {
     "VonHeikemen/lsp-zero.nvim",
-    version = "v3.x",
-    dependencies = {
-      -- LSP Support
-      {
-        "neovim/nvim-lspconfig",
-      }, -- Required
-      { -- Optional
-        "williamboman/mason.nvim",
-        build = function()
-          pcall(vim.cmd, "MasonUpdate")
-        end,
-      },
-      { "williamboman/mason-lspconfig.nvim" }, -- Optional
-      -- Autocompletion
-      { "hrsh7th/nvim-cmp" },               -- Required
-      { "hrsh7th/cmp-nvim-lsp" },           -- Required
-      { "hrsh7th/cmp-buffer" },             -- Optional
-      { "hrsh7th/cmp-path" },               -- Optional
-      { "hrsh7th/cmp-nvim-lua" },           -- Optional
-      --{ "saadparwaiz1/cmp_luasnip" },       -- Optional
-      -- Signature Help
-      --{ "folke/neodev.nvim",                opts = {} }, -- Optional
-      -- Snippets
-      {
-        "L3MON4D3/LuaSnip",
-        build = (not jit.os:find("Windows"))
-            and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
-            or nil,
-        dependencies = {
-          {
-            "rafamadriz/friendly-snippets",
-            config = function()
-              require("luasnip.loaders.from_vscode").lazy_load()
-            end,
-          },
-          {
-            "nvim-cmp",
-            dependencies = {
-              "saadparwaiz1/cmp_luasnip",
-            },
-            opts = function(_, opts)
-              opts.snippet = {
-                expand = function(args)
-                  require("luasnip").lsp_expand(args.body)
-                end,
-              }
-            end,
-          },
-        },
-        opts = {
-          history = true,
-          delete_check_events = "TextChanged",
-        },
-        -- stylua: ignore
-        keys = {
-          {
-            "<tab>",
-            function()
-              return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
-            end,
-            expr = true,
-            silent = true,
-            mode = "i",
-          },
-          { "<tab>",   function() require("luasnip").jump(1) end,  mode = "s" },
-          { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-        },
-      },
-      config = function()
-        require("luasnip").filetype_extend("javascript", { "javascriptreact" })
-        require("luasnip").filetype_extend("javascript", { "html" })
-      end,
-      {
-        "SmiteshP/nvim-navic",
-        dependencies = { "neovim/nvim-lspconfig" },
-        config = function()
-          local icons = require("mdupree.icons")
-          require("nvim-navic").setup({
-            icons = icons.kinds,
-          })
-
-          vim.api.nvim_create_augroup("LspAttach_navic", {})
-          vim.api.nvim_create_autocmd("LspAttach", {
-            group = "LspAttach_navic",
-            callback = function(args)
-              if not (args.data and args.data.client_id) then
-                return
-              end
-
-              local bufnr = args.buf
-              local client = vim.lsp.get_client_by_id(args.data.client_id)
-              if client.server_capabilities.documentSymbolProvider then
-                require("nvim-navic").attach(client, bufnr)
-              end
-            end,
-          })
-        end,
-      },
-    },
-    config = function()
-      --
-      -- config
-      --
-      local lsp = require("lsp-zero")
-
-      vim.opt.signcolumn = "yes"
-      local function status_line()
-        local mode = "%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}"
-        local file_name = "%-.16t"
-        local buf_nr = "[%n]"
-        local modified = " %-m"
-        local file_type = " %y"
-        local right_align = "%="
-        local line_no = "%10([%l/%L%)]"
-        local pct_thru_file = "%5p%%"
-
-        return string.format(
-          "%s%s%s%s%s%s%s",
-          file_name,
-          buf_nr,
-          modified,
-          file_type,
-          right_align,
-          line_no,
-          pct_thru_file
-        )
-      end
-
-      -- vim.opt.statusline = status_line()
-      -- vim.opt.winbar = status_line()
-
-      lsp.preset("recommended")
-
-      -- NOTE: Not sure if i need this with ^ buffer_autoformat
-      lsp.format_on_save({
-        format_opts = {
-          async = false,
-          timeout_ms = 10000,
-        },
-        servers = {
-          ["pyright"] = { "python" },
-          ["tsserver"] = { "javascript", "typescript" },
-          ["rust_analyzer"] = { "rust" },
-          -- Add this for Godot support
-          --["gdtoolkit"] = { "gdscript" },
-        },
-      })
-
-      lsp.set_sign_icons({
-        error = "✘",
-        warn = "▲",
-        hint = "⚑",
-        info = "»",
-      })
-
-      --
-      -- MASON Configuration
-      --
-      require("mason").setup({})
-      require("mason-lspconfig").setup({
-        ensure_installed = {
-          "lua_ls",
-          "tsserver",
-          "rust_analyzer",
-          "yamlls",
-          "tailwindcss",
-          "jsonls",
-          "pyright",
-        },
-        handlers = {
-          lsp.default_setup,
-          lua_ls = function()
-            local lua_opts = lsp.nvim_lua_ls()
-            local lspconfig = require("lspconfig")
-            lspconfig.lua_ls.setup(lua_opts)
-            lspconfig.eslint.setup({})
-          end,
-        },
-      })
-
-      --
-      -- CMP Configuration
-      --
-      local cmp = require("cmp")
-      cmp.setup({
-        sources = {
-          -- Uncomment for copilot to show in completion menu
-          -- Personally i don't like it
-          --{ name = "copilot" },
-          { name = "luasnip" },
-          { name = "nvim_lsp", max_item_count = 6 },
-          { name = "buffer",   max_item_count = 6 },
-          { name = "path" },
-        },
-        --- (Optional) Show source name in completion menu
-        --formatting = cmp_format,
-        formatting = {
-          -- changing the order of fields so the icon is the first
-          fields = { "menu", "abbr", "kind" },
-
-          -- here is where the change happens
-          format = function(entry, item)
-            local menu_icon = {
-              nvim_lsp = "🛠",
-              luasnip = "🔨",
-              buffer = "🗄",
-              path = "🖫",
-              nvim_lua = "Π",
-              copilot = "🚀",
-            }
-
-            item.menu = menu_icon[entry.source.name]
-            return item
-          end,
-        },
-        mapping = {
-          --Copilot Section
-          -- This is neceaary for copilot to work with cmp
-          -- https://lsp-zero.netlify.app/v3.x/guide/setup-copilot-lua-plus-nvim-cmp.html
-          --["<CR>"] = cmp.mapping.confirm({
-          -- documentation says this is important.
-          -- I don't know why.
-          --behavior = cmp.ConfirmBehavior.Replace,
-          --select = false,
-          --}),
-          --END Copilot Section
-          ["<C-y>"] = cmp.mapping.confirm({ select = false }),
-          ["<C-e>"] = cmp.mapping.abort(),
-          ["<Up>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
-          ["<Down>"] = cmp.mapping.select_next_item({ behavior = "select" }),
-          ["<C-p>"] = cmp.mapping(function()
-            if cmp.visible() then
-              cmp.select_prev_item({ behavior = "insert" })
-            else
-              cmp.complete()
-            end
-          end),
-          ["<C-n>"] = cmp.mapping(function()
-            if cmp.visible() then
-              cmp.select_next_item({ behavior = "insert" })
-            else
-              cmp.complete()
-            end
-          end),
-        },
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end,
-        },
-      })
-
-      lsp.on_attach(function(client, bufnr)
-        lsp.default_keymaps({ buffer = bufnr })
-        lsp.buffer_autoformat()
-
-        local opts = { buffer = bufnr, remap = false }
-        vim.keymap.set("n", "gd", function()
-          vim.lsp.buf.definition()
-        end, opts)
-        vim.keymap.set("n", "K", function()
-          vim.lsp.buf.hover()
-        end, opts)
-        vim.keymap.set("n", "<leader>vws", function()
-          vim.lsp.buf.workspace_symbol()
-        end, opts)
-        vim.keymap.set("n", "<leader>vd", function()
-          vim.diagnostic.open_float()
-        end, opts)
-        vim.keymap.set("n", "[d", function()
-          vim.diagnostic.goto_next()
-        end, opts)
-        vim.keymap.set("n", "]d", function()
-          vim.diagnostic.goto_prev()
-        end, opts)
-        vim.keymap.set("n", "<leader>vca", function()
-          vim.lsp.buf.code_action()
-        end, opts)
-        vim.keymap.set("n", "<leader>vrr", function()
-          vim.lsp.buf.references()
-        end, opts)
-        vim.keymap.set("n", "<leader>vrn", function()
-          vim.lsp.buf.rename()
-        end, opts)
-        vim.keymap.set("i", "<C-h>", function()
-          vim.lsp.buf.signature_help()
-        end, opts)
-        vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { buffer = bufnr })
-      end)
-
-      lsp.setup()
-    end,
+    version = "v4.x",
+    dependencies = lsp_dependencies,
+    config = lsp_config,
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    build = (not jit.os:find("Windows")) and "make install_jsregexp" or nil,
+    dependencies = luasnip_dependencies,
+    opts = luasnip_opts,
+    keys = luasnip_keys,
+  },
+  {
+    "SmiteshP/nvim-navic",
+    dependencies = { "neovim/nvim-lspconfig" },
+    config = navic_config,
   },
 }
