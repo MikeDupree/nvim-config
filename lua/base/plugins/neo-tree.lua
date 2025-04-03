@@ -14,6 +14,11 @@ return {
   ---@type neotree.Config?
   opts = {
     -- fill any relevant options here
+    filesystem = {
+      follow_current_file = {
+        enabled = true,
+      },
+    },
   },
   keys = {
     { 'n', '<leader>e', ':Neotree Toggle<CR>', { silent = true } },
