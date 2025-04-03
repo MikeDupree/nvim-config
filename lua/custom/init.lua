@@ -6,6 +6,7 @@ local custom = {
   require 'custom.plugins.harpoon',
   require 'custom.plugins.cursor_word_highlight',
   require 'custom.plugins.terminal',
+  require 'custom.plugins.status_line',
 }
 
 return custom
