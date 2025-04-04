@@ -1,3 +1,5 @@
+local js_config = { 'eslint', 'prettierd', 'prettier' }
+
 return { -- Autoformat
   'stevearc/conform.nvim',
   event = { 'BufWritePre' },
@@ -34,7 +36,10 @@ return { -- Autoformat
       -- python = { "isort", "black" },
       --
       -- You can use 'stop_after_first' to run the first available formatter from the list
-      -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      javascript = js_config,
+      typescript = js_config,
+      javascriptreact = js_config,
+      typescriptreact = js_config,
     },
   },
 }
