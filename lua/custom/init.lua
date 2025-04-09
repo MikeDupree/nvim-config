@@ -5,6 +5,7 @@ local custom = {
   --require 'custom.plugins.mini',
   require 'custom.plugins.harpoon',
   require 'custom.plugins.cursor_word_highlight',
+  require 'custom.plugins.refactoring',
   require 'custom.plugins.terminal',
   require 'custom.plugins.status_line',
 }

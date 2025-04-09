@@ -95,6 +95,11 @@ return {
         --  For example, in C this would take you to the header.
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
+        map('td', vim.lsp.buf.type_definition, '[T]ype [D]efinition')
+        map('K', vim.lsp.buf.hover, 'LSP Hover definition')
+        map('<leader>vws', vim.lsp.buf.workspace_symbol, '[V]iew [W]orkspace [S]ymobl')
+        map('<leader>vd', vim.diagnostic.open_float, '[V]iew [D]iagnostic')
+
         -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
         ---@param client vim.lsp.Client
         ---@param method vim.lsp.protocol.Method

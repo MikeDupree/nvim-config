@@ -1,4 +1,5 @@
 local base_plugins = {
+  -- Base Plugins
   require 'base.plugins.autocomplete',
   require 'base.plugins.autoformat',
   require 'base.plugins.syntax_highlight',
@@ -7,7 +8,8 @@ local base_plugins = {
   require 'base.plugins.fuzzy_finder',
   require 'base.plugins.neo-tree',
   require 'base.plugins.which_key',
-  require 'base.plugins.gitsigns_basic',
+  -- require 'base.plugins.gitsigns_basic',
+  require 'base.plugins.gitsigns',
   require 'base.plugins.vim-sleuth',
   require 'base.plugins.todo-comments',
   require 'base.plugins.copy_paste',
