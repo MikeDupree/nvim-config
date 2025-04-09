@@ -56,10 +56,10 @@ end
 -- Returns the current VIM Mode
 local function get_mode()
   local mode_symbol = {
-    n = '𝓃',
-    i = '𝒾',
-    v = '𝓋',
-    [''] = '^𝓋',
+    n = '󱉶',
+    i = '',
+    v = '',
+    [''] = '^V',
     V = 'V',
     c = '⚡',
     no = 'no',
@@ -78,7 +78,6 @@ local function get_mode()
     t = 't',
   }
   return mode_symbol[vim.fn.mode()]
-  --return ':MODE'
 end
 
 -- Returns color for VIM Mode based on current mode.
@@ -186,7 +185,7 @@ local left_sections = {
   {
     -- mode component
     get_mode,
-    color = get_mode_color(),
+    color = get_mode_color,
     -- auto change color according to neovims mode
     padding = { right = 1 },
   },
