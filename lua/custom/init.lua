@@ -9,6 +9,10 @@ local custom = {
   require 'custom.plugins.terminal',
   require 'custom.plugins.status_line',
   require 'custom.plugins.markdown_preview',
+  require 'custom.plugins.markdown_viewer',
+  require 'custom.plugins.ui',
+  require 'custom.plugins.notes',
+  require 'custom.plugins.tasks',
 }
 
 return custom
