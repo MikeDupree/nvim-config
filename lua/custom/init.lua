@@ -13,6 +13,7 @@ local custom = {
   require 'custom.plugins.ui',
   require 'custom.plugins.notes',
   require 'custom.plugins.tasks',
+  require 'custom.plugins.rest',
 }
 
 return custom
