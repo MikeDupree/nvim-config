@@ -1,5 +1,16 @@
 # NVIM Config
 
+## My custom neovim configuration, based off kickstarter.nvim
+
+### Details
+
+Plugins are broken up by `base` and `custom`
+* Base: all the plugins I believe are necessary for development
+* Custom: all the additional plugins I find useful
+
+
+
+
 
                                                                                                          
                                                                                                          
