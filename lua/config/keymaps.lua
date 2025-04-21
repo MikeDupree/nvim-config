@@ -8,12 +8,16 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+--
+-- Save/Quit
 -- save file
 vim.keymap.set('n', '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
-
 -- quit
 vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit all' })
 
+--
+-- Copy/Paste
+--
 -- copy to clipboard
 vim.keymap.set('n', '<leader>y', '+y', { desc = 'Copy to clipboard' })
 -- paste from clipboard
@@ -32,7 +36,7 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 -- Switch between buffers
 vim.keymap.set('n', '<S-l>', ':bnext<CR>')
-vim.keymap.set('n', '<S-p>', ':bprevious<CR>')
+vim.keymap.set('n', '<S-p>', ':bprevious<CR>') -- FIX: S-p currently doesn't work to go back to prev buffer
 
 -- indent selected text
 vim.keymap.set('v', '<', '<gv', { desc = 'Indent selected text left' })
@@ -46,7 +50,7 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 
--- Git (TODO move to git plugin)
+-- Git (TODO: move to git plugin)
 vim.keymap.set('n', '<Leader>gb', '<cmd>Gitsigns toggle_current_line_blame<CR>', { desc = '[g]it toggle [b]lame' })
 vim.keymap.set('n', '<Leader>gB', '<cmd>Gitsigns blame_line<CR>', { desc = '[g]it [B]lame current line' })
 
