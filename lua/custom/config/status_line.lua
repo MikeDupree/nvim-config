@@ -175,13 +175,13 @@ end
 ---
 local left_sections = {
   -- section_separators = { left = '', right = '' },
-  {
-    function()
-      return ''
-    end,
-    color = { fg = colors.cyan }, -- Sets highlighting of component
-    padding = { left = 0, right = 1 }, -- We don't need space before this
-  },
+  -- {
+  --   function()
+  --     return '<:|'
+  --   end,
+  --   color = { fg = colors.cyan }, -- Sets highlighting of component
+  --   padding = { left = 0, right = 1 }, -- We don't need space before this
+  -- },
   {
     -- mode component
     get_mode,
@@ -198,13 +198,16 @@ local left_sections = {
   -- { "location" },
   --  { "progress", color = { fg = colors.fg, gui = "bold" } },
   {
-    harpoon_component,
-    color = { fg = '#ffd866', gui = 'bold' },
-  },
-  {
     'filename',
     cond = conditions.buffer_not_empty,
     color = { fg = '#ffd866', gui = 'bold' },
+  },
+  {
+    function()
+      return '['
+    end,
+    color = { fg = colors.cyan },
+    padding = { left = 1, right = 0 },
   },
   {
     'diagnostics',
@@ -216,6 +219,17 @@ local left_sections = {
       color_info = { fg = colors.info },
     },
   },
+  {
+    function()
+      return ']'
+    end,
+    color = { fg = colors.cyan },
+    padding = { left = 0, right = 1 },
+  },
+  -- {
+  --   harpoon_component,
+  --   color = { fg = '#ffd866', gui = 'bold' },
+  -- },
 }
 
 local navic = require 'nvim-navic'
@@ -250,7 +264,27 @@ right_sections = {
   -- 	cond = conditions.hide_in_width,
   -- 	color = { fg = colors.green, gui = "bold" },
   -- },
-
+  {
+    'fileformat',
+    fmt = string.upper,
+    icons_enabled = true,
+    color = { fg = colors.cyan, gui = 'bold' },
+  },
+  {
+    'branch',
+    icon = '',
+    color = { fg = colors.violet, gui = 'bold' },
+  },
+  -- {
+  --   'diff',
+  --   symbols = { added = ' ', modified = '⚠', removed = ' ' },
+  --   diff_color = {
+  --     added = { fg = colors.green },
+  --     modified = { fg = colors.yellow },
+  --     removed = { fg = colors.red },
+  --   },
+  --   cond = conditions.hide_in_width,
+  -- },
   {
     -- Lsp server name .
     get_lsp_server_name,
@@ -258,37 +292,13 @@ right_sections = {
     color = { fg = colors.fg, gui = 'bold' },
     padding = { left = 1, right = 0 }, -- We don't need space before this
   },
-
-  {
-    'fileformat',
-    fmt = string.upper,
-    icons_enabled = true,
-    color = { fg = colors.cyan, gui = 'bold' },
-  },
-
-  {
-    'branch',
-    icon = '',
-    color = { fg = colors.violet, gui = 'bold' },
-  },
-
-  {
-    'diff',
-    symbols = { added = ' ', modified = '⚠', removed = ' ' },
-    diff_color = {
-      added = { fg = colors.green },
-      modified = { fg = colors.yellow },
-      removed = { fg = colors.red },
-    },
-    cond = conditions.hide_in_width,
-  },
-  {
-    function()
-      return ''
-    end,
-    color = { fg = colors.magenta },
-    padding = { left = 1 },
-  },
+  -- {
+  --   function()
+  --     return '|:>'
+  --   end,
+  --   color = { fg = colors.magenta },
+  --   padding = { left = 1 },
+  -- },
 }
 ---
 -- Insert Left Sections
